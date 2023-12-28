@@ -1,0 +1,11 @@
+../Core/srccpp/BussinessLogic/ApplicationSW.cpp:51:1:Loadmeasure::Loadmeasure()	16	static
+../Core/srccpp/BussinessLogic/ApplicationSW.cpp:56:1:Loadmeasure::~Loadmeasure()	16	static
+../Core/srccpp/BussinessLogic/ApplicationSW.cpp:56:1:virtual Loadmeasure::~Loadmeasure()	16	static
+../Core/srccpp/BussinessLogic/ApplicationSW.cpp:60:6:void Loadmeasure::run()	16	static
+../Core/srccpp/BussinessLogic/ApplicationSW.cpp:71:6:void Loadmeasure::inputBasedTrigger()	16	static
+../Core/srccpp/BussinessLogic/ApplicationSW.cpp:102:10:uint32_t Loadmeasure::calculationCarbonWeight()	24	static
+../Core/srccpp/BussinessLogic/ApplicationSW.cpp:126:10:uint32_t Loadmeasure::calculationSilicaWeight()	24	static
+../Core/srccpp/BussinessLogic/ApplicationSW.cpp:151:10:uint32_t Loadmeasure::calculationManganeaseWeight()	24	static
+../Core/srccpp/BussinessLogic/ApplicationSW.cpp:175:10:uint32_t Loadmeasure::calculationCopperWeight()	24	static
+../Core/srccpp/BussinessLogic/ApplicationSW.cpp:199:10:uint32_t Loadmeasure::calculationTinWeight()	24	static
+../Core/srccpp/BussinessLogic/ApplicationSW.cpp:224:10:uint32_t Loadmeasure::calculationZincWeight()	24	static

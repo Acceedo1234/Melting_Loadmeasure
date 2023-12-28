@@ -1,0 +1,11 @@
+../Core/Src/W5500_C/w5500_spi.c:79:6:wizchip_select	8	static
+../Core/Src/W5500_C/w5500_spi.c:84:6:wizchip_deselect	8	static
+../Core/Src/W5500_C/w5500_spi.c:89:6:W5500_ReadBuff	16	static
+../Core/Src/W5500_C/w5500_spi.c:94:6:W5500_WriteBuff	16	static
+../Core/Src/W5500_C/w5500_spi.c:99:9:W5500_Spi	32	static
+../Core/Src/W5500_C/w5500_spi.c:131:6:Callback_IPAssigned	4	static
+../Core/Src/W5500_C/w5500_spi.c:135:6:Callback_IPConflict	4	static
+../Core/Src/W5500_C/w5500_spi.c:188:6:wiz5500Init	40	static
+../Core/Src/W5500_C/w5500_spi.c:232:6:processDHCP	16	static
+../Core/Src/W5500_C/w5500_spi.c:260:6:initializeHttp	16	static
+../Core/Src/W5500_C/w5500_spi.c:265:6:ethernetHTTPRoutine	8	static
