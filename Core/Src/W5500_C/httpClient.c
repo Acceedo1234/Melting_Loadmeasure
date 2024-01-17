@@ -13,6 +13,7 @@
 #include "socket.h"
 #include "httpClient.h"
 
+#define SimulationTest 0
 /* Private define ------------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
@@ -429,7 +430,10 @@ void receivehttpcheck(void)
 
 	index_s = get_index(filtereddata,':');
 	index_e = get_index(filtereddata,',');
-	//char check_filterdata[] = "$H:123456,t=255,f=5,c=234,si=1234,mn=3485,cu=67,sn=786,zn=367,sts=3#";
+#if (SimulationTest==1)
+	char check_filterdata[] = "$H:123456,t=255,f=5,c=234,si=1234,mn=3485,cu=67,sn=786,zn=367,sts=3#";
+	strcpy(filtereddata,check_filterdata);
+#endif
 	heatnumber = getSubstring(filtereddata,index_s,index_e);
 
 	index_s = get_index(filtereddata,'t');

@@ -35,15 +35,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  15 .debug_ranges 00001b90  00000000  00000000  0005aa98  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00009476  00000000  00000000  0005c628  2**0
+ 16 .debug_macro  0000947c  00000000  00000000  0005c628  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00025bda  00000000  00000000  00065a9e  2**0
+ 17 .debug_line   00025bda  00000000  00000000  00065aa4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000e5317  00000000  00000000  0008b678  2**0
+ 18 .debug_str    000e5328  00000000  00000000  0008b67e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000050  00000000  00000000  0017098f  2**0
+ 19 .comment      00000050  00000000  00000000  001709a6  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00008610  00000000  00000000  001709e0  2**2
+ 20 .debug_frame  00008610  00000000  00000000  001709f8  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -6447,7 +6447,10 @@ void receivehttpcheck(void)
  8002938:	4603      	mov	r3, r0
  800293a:	4a8b      	ldr	r2, [pc, #556]	; (8002b68 <receivehttpcheck+0x2a0>)
  800293c:	6013      	str	r3, [r2, #0]
-	//char check_filterdata[] = "$H:123456,t=255,f=5,c=234,si=1234,mn=3485,cu=67,sn=786,zn=367,sts=3#";
+#if (SimulationTest==1)
+	char check_filterdata[] = "$H:123456,t=255,f=5,c=234,si=1234,mn=3485,cu=67,sn=786,zn=367,sts=3#";
+	strcpy(filtereddata,check_filterdata);
+#endif
 	heatnumber = getSubstring(filtereddata,index_s,index_e);
  800293e:	4b89      	ldr	r3, [pc, #548]	; (8002b64 <receivehttpcheck+0x29c>)
  8002940:	681b      	ldr	r3, [r3, #0]
