@@ -10,7 +10,7 @@
 extern UART_HandleTypeDef hlpuart1;
 extern UART_HandleTypeDef huart1;
 uint8_t rxTempBuff[5];
-extern uint8_t u8rxbuf[255];
+extern uint8_t u8rxbuf[24];
 uint8_t checkbuff[200];
 uint8_t refinc;
 uint8_t Rx_Dwin_Data_Buff[50];

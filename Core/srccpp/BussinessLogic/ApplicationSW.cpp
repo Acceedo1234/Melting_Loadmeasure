@@ -40,6 +40,7 @@ uint8_t start_process_control_timer;
 uint8_t stop_timer_count;
 uint8_t process_complete;
 uint16_t seq1_duration_total,seq2_duration_total;
+uint8_t updateTargetWightInMem;
 
 uint8_t debouncestart,debounceend;
 uint8_t calculateDeltaWeight;
@@ -83,6 +84,7 @@ void Loadmeasure::inputBasedTrigger(){
 			copperTargetWghtMem     = copperActWght      - rxReqCu;
 			tinTargetWghtMem        = tinActWght         - rxReqSn;
 			zincTargetWghtMem       = zincActWeight      - rxReqZn;
+			updateTargetWightInMem = 1;
 		}
 	}
 	else if(readStartbutton == GPIO_PIN_SET){

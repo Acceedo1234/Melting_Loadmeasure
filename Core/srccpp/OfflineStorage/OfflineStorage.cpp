@@ -10,6 +10,9 @@
 #include <string.h>
 using namespace std;
 
+#define highByte(a) (((a) >> 8) & 0xFF)
+#define lowByte(a) ((a) & 0xFF)
+
 #define MAXNOOFBLOCK 32
 
 extern "C" {
@@ -24,6 +27,7 @@ void W25qxx_EraseChip(void);
 uint8_t ProductionSet_uintFormat[100]={0};
 char ProductionSet_charFormat[100]={'\0'};
 uint16_t SectorPos;
+uint8_t calculateDeltaWeight_K1;
 
 /*Data need to saved in flash*/
 
@@ -35,7 +39,9 @@ uint16_t rxReqCarbon_K1,rxReqSilica_K1,rxReqMn_K1,rxReqCu_K1,rxReqSn_K1,rxReqZn_
 extern uint8_t Ip_config_Ip[4],Ip_Config_Subnet[4],Ip_config_gateway[4],Ip_config_DNS[4],Ip_config_Server[4];
 extern uint8_t Update_Dwin_Set_Data;
 extern uint16_t Ip_config_Server_Port;
-
+extern uint8_t updateTargetWightInMem;
+extern uint32_t carbonTargetWghtMem,silicaTargetWghtMem,manganeaseTargetWghtMem,copperTargetWghtMem,tinTargetWghtMem,zincTargetWghtMem;
+extern uint8_t calculateDeltaWeight;
 
 OfflineStorage::OfflineStorage() {
 	// TODO Auto-generated constructor stub
@@ -50,6 +56,7 @@ void OfflineStorage::run()
 {
 	m_writesetdata();
 	m_writecalculationdata();
+	writeTargetdata();
 }
 
 void OfflineStorage::m_writesetdata(){
@@ -116,6 +123,47 @@ void OfflineStorage::m_writecalculationdata(){
 		}
 }
 
+void OfflineStorage::writeTargetdata()
+{
+	if(calculateDeltaWeight!= calculateDeltaWeight_K1)
+	{
+		updateTargetWightInMem=1;
+		calculateDeltaWeight_K1= calculateDeltaWeight;
+	}
+	if(updateTargetWightInMem==1)
+	{
+		updateTargetWightInMem=0;
+		m_writeFlashBuf[0] = ((uint8_t) ((carbonTargetWghtMem) >> 16));
+		m_writeFlashBuf[1] = highByte(carbonTargetWghtMem);
+		m_writeFlashBuf[2] = lowByte(carbonTargetWghtMem);
+
+		m_writeFlashBuf[3] = ((uint8_t) ((carbonTargetWghtMem) >> 16));
+		m_writeFlashBuf[4] = highByte(carbonTargetWghtMem);
+		m_writeFlashBuf[5] = lowByte(carbonTargetWghtMem);
+
+		m_writeFlashBuf[6] = ((uint8_t) ((carbonTargetWghtMem) >> 16));
+		m_writeFlashBuf[7] = highByte(carbonTargetWghtMem);
+		m_writeFlashBuf[8] = lowByte(carbonTargetWghtMem);
+
+		m_writeFlashBuf[9] = ((uint8_t) ((carbonTargetWghtMem) >> 16));
+		m_writeFlashBuf[10] = highByte(carbonTargetWghtMem);
+		m_writeFlashBuf[11] = lowByte(carbonTargetWghtMem);
+
+
+		m_writeFlashBuf[12] = ((uint8_t) ((carbonTargetWghtMem) >> 16));
+		m_writeFlashBuf[13] = highByte(carbonTargetWghtMem);
+		m_writeFlashBuf[14] = lowByte(carbonTargetWghtMem);
+
+		m_writeFlashBuf[15] = ((uint8_t) ((carbonTargetWghtMem) >> 16));
+		m_writeFlashBuf[16] = highByte(carbonTargetWghtMem);
+		m_writeFlashBuf[17] = lowByte(carbonTargetWghtMem);
+
+		m_writeFlashBuf[18] = calculateDeltaWeight;
+
+		W25qxx_WriteSector(m_writeFlashBuf,10,0,19);
+	}
+}
+
 void OfflineStorage::m_readIPdata(){
 	W25qxx_ReadSector(m_readFlashBuf,100,0,22);
 
@@ -165,10 +213,23 @@ void OfflineStorage::m_readsetdata(){
 	rxReqZn_K1 = rxReqZn;
 }
 
+void OfflineStorage::readTargetdata(){
+	W25qxx_ReadSector(m_readFlashBuf,10,0,19);
+	carbonTargetWghtMem = (m_readFlashBuf[0]<<16 | m_readFlashBuf[1]<<8 | m_readFlashBuf[2]);
+	silicaTargetWghtMem = (m_readFlashBuf[3]<<16 | m_readFlashBuf[4]<<8 | m_readFlashBuf[5]);
+	manganeaseTargetWghtMem = (m_readFlashBuf[6]<<16 | m_readFlashBuf[7]<<8 | m_readFlashBuf[8]);
+	copperTargetWghtMem = (m_readFlashBuf[9]<<16 | m_readFlashBuf[10]<<8 | m_readFlashBuf[11]);
+	tinTargetWghtMem = (m_readFlashBuf[12]<<16 | m_readFlashBuf[13]<<8 | m_readFlashBuf[14]);
+	zincTargetWghtMem = (m_readFlashBuf[15]<<16 | m_readFlashBuf[16]<<8 | m_readFlashBuf[17]);
+	calculateDeltaWeight = m_readFlashBuf[18];
+	calculateDeltaWeight_K1 = calculateDeltaWeight;
+}
+
 void OfflineStorage::ReadOfflinedataInit()
 {
 	m_readIPdata();
 	m_readsetdata();
+	readTargetdata();
 }
 
 void OfflineStorage::ECUProductionInit(void)

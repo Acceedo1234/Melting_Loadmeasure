@@ -16,7 +16,7 @@ public:
 	void ReadOfflinedataInit();
 	void ECUProductionInit(void);
 private:
-	uint8_t m_writeFlashBuf[20];
+	uint8_t m_writeFlashBuf[30];
 	uint8_t m_readFlashBuf[30];
 	uint8_t m_writeDwinBuf[30];
 
@@ -26,6 +26,8 @@ private:
 	void m_readsetdata(void);
 	void m_writeCountinc();
 	void m_readCountinc();
+	void writeTargetdata();
+	void readTargetdata();
 
 
 };

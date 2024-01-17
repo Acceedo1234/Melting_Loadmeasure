@@ -37,6 +37,7 @@ extern uint8_t Rx_Dwin_Data_Buff[50];
 uint8_t TxSeqComplete;
 uint8_t test;
 uint8_t Rx_Dwin_Point;
+uint8_t buffclean;
 
 uint8_t Ip_config_Ip[4],Ip_Config_Subnet[4],Ip_config_gateway[4],Ip_config_DNS[4],Ip_config_Server[4];
 uint8_t Update_Dwin_Set_Data;
@@ -155,7 +156,10 @@ void Modbusrtu::ModbusReadTransaction(void)
 	}
 	//out_read_rxint_set.Noofbytesrx = (_u16ReadQty*2)+5;
 	HAL_UART_Transmit_IT(&huart1,u8ModbusRegister,sizeof(u8ModbusRegister));
-
+	for(buffclean=0;buffclean<=23;buffclean++)
+	{
+		u8rxbuf[buffclean]=0;
+	}
 }
 //Hardware callback
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
