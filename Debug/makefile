@@ -91,8 +91,8 @@ all: main-build
 main-build: loadmeasure.elf secondary-outputs
 
 # Tool invocations
-loadmeasure.elf loadmeasure.map: $(OBJS) $(USER_OBJS) D:\PROGRAM\Naveen\melting\Loadmeasure-20.12.23\STM32L433RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "loadmeasure.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\PROGRAM\Naveen\melting\Loadmeasure-20.12.23\STM32L433RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="loadmeasure.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+loadmeasure.elf loadmeasure.map: $(OBJS) $(USER_OBJS) D:\SourceTree\melting_loadmeasure\STM32L433RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "loadmeasure.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\SourceTree\melting_loadmeasure\STM32L433RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="loadmeasure.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

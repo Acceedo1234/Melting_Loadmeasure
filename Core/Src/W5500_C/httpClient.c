@@ -33,13 +33,20 @@ uint16_t httpc_isReceived = HTTPC_FALSE;
 uint16_t valhttp;
 uint8_t rxBufhttp[2048];
 uint8_t *startPosition;
-uint8_t filtereddata[200];
+char filtereddata[200];
+char filterdatasplit[100];
 
 uint32_t heatnumber;
 uint16_t rxType,furnace;
 uint16_t rxReqCarbon,rxReqSilica,rxReqMn,rxReqCu,rxReqSn,rxReqZn;
+
+//rxIndex_1,rxIndex_2;
+uint8_t rxSplit[20];
 /* Private functions prototypes ----------------------------------------------*/
 uint16_t get_httpc_any_port(void);
+int get_index(char* array,char c);
+int index_s,index_e;
+uint32_t getSubstring(char array[],int startpoint,int endpoint);
 /*
 255.255.255.0
 192.168.0.200
@@ -419,14 +426,85 @@ void receivehttpcheck(void)
 	startPosition = strchr(rxBufhttp,'$');
 	strcpy(filtereddata,startPosition);
 	if(filtereddata[0] == '$'){
-	heatnumber = filtereddata[2]-48 +((filtereddata[1]-48)*10);
-	rxType 	 =  filtereddata[18]-48 +((filtereddata[17]-48)*10)+((filtereddata[16]-48)*100)+((filtereddata[15]-48)*1000);
-	furnace	 =  filtereddata[23]-48 +((filtereddata[22]-48)*10)+((filtereddata[21]-48)*100)+((filtereddata[20]-48)*1000);
-	rxReqCarbon	=  filtereddata[26]-48 +((filtereddata[25]-48)*10);
-	rxReqSilica	=  filtereddata[28]-48 +((filtereddata[27]-48)*10);
-	rxReqMn	=  filtereddata[31]-48 +((filtereddata[30]-48)*10);
-	rxReqCu	=  filtereddata[33]-48 +((filtereddata[32]-48)*10);
-	rxReqSn = filtereddata[42]-48 +((filtereddata[41]-48)*10);
-	rxReqZn = filtereddata[45]-48 +((filtereddata[44]-48)*10);
+
+	index_s = get_index(filtereddata,':');
+	index_e = get_index(filtereddata,',');
+	char check_filterdata[] = "$H:123456,t=255,f=5,c=234,si=1234,mn=3485,cu=67,sn=786,zn=367,sts=3#";
+	heatnumber = getSubstring(check_filterdata,index_s,index_e);
+
+	index_s = get_index(check_filterdata,'t');
+	index_e = get_index(check_filterdata,'f');
+	index_s=index_s+1;
+	index_e=index_e-1;
+	rxType 	 = (uint16_t)getSubstring(check_filterdata,index_s,index_e);
+
+	index_s = get_index(check_filterdata,'f');
+	index_e = get_index(check_filterdata,'c');
+	index_s=index_s+1;
+	index_e=index_e-1;
+	furnace	 =  (uint16_t)getSubstring(check_filterdata,index_s,index_e);
+
+	index_s = get_index(check_filterdata,'c');
+	index_e = get_index(check_filterdata,'s');
+	index_s=index_s+1;
+	index_e=index_e-1;
+	rxReqCarbon	= (uint16_t)getSubstring(check_filterdata,index_s,index_e);
+
+	index_s = get_index(check_filterdata,'s');
+	index_e = get_index(check_filterdata,'m');
+	index_s=index_s+2;
+	index_e=index_e-1;
+	rxReqSilica	=   (uint16_t)getSubstring(check_filterdata,index_s,index_e);
+
+	index_s = get_index(check_filterdata,'m');
+	index_e = get_index(check_filterdata,'u');
+	index_s=index_s+2;
+	index_e=index_e-2;
+	rxReqMn	=   (uint16_t)getSubstring(check_filterdata,index_s,index_e);
+
+	index_s = get_index(check_filterdata,'u');
+	strcpy(filterdatasplit,&check_filterdata[index_s]);
+
+	index_s = get_index(filterdatasplit,'u');
+	index_e = get_index(filterdatasplit,'s');
+	index_s=index_s+1;
+	index_e=index_e-1;
+	rxReqCu	=   (uint16_t)getSubstring(filterdatasplit,index_s,index_e);
+
+	index_s = get_index(filterdatasplit,'s');
+	index_e = get_index(filterdatasplit,'z');
+	index_s=index_s+2;
+	index_e=index_e-1;
+	rxReqSn =  (uint16_t)getSubstring(filterdatasplit,index_s,index_e);
+
+	index_s = get_index(filterdatasplit,'z');
+	index_e = get_index(filterdatasplit,'t');
+	index_s=index_s+2;
+	index_e=index_e-2;
+	rxReqZn =  (uint16_t)getSubstring(filterdatasplit,index_s,index_e);
 	}
+}
+
+int get_index(char* array,char c)
+{
+	char *i = strchr(array,c);
+	if(i == NULL)
+	{
+		return -1;
+	}
+	return (int)(i-array);
+}
+
+uint32_t getSubstring(char array_[],int startpoint,int endpoint)
+{
+	uint8_t i,j;
+	uint32_t value_raw;
+	char substring[30]={0};
+	for(i=(startpoint+1),j=0;i<=(endpoint-1);i++,j++)
+	{
+		substring[j] = array_[i];
+	}
+	substring[j+1]='\0';
+	value_raw =atoi(substring);
+	return value_raw;
 }

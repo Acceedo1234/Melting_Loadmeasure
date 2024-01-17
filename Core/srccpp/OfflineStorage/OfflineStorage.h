@@ -17,10 +17,11 @@ public:
 	void ECUProductionInit(void);
 private:
 	uint8_t m_writeFlashBuf[20];
-	uint8_t m_readFlashBuf[20];
+	uint8_t m_readFlashBuf[30];
+	uint8_t m_writeDwinBuf[30];
 
 	void m_writecalculationdata();
-	void m_readcalculationdata();
+	void m_readIPdata();
 	void m_writesetdata(void);
 	void m_readsetdata(void);
 	void m_writeCountinc();

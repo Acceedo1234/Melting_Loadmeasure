@@ -24,7 +24,7 @@ wiz_NetInfo gWIZNETINFO = { .mac = {0x00, 0x03, 0x19,0x45, 0x00, 0x02},
                             .ip = {192, 168, 0, 5},
                             .sn = {255,255,255,0},
                             .gw = {192, 168, 0, 1},
-                            .dns = {0,0,0,0},
+                            .dns = {8,8,8,8},
                             .dhcp = NETINFO_STATIC };
 
 wiz_NetInfo checkgWIZNETINFO;
@@ -66,7 +66,9 @@ extern uint8_t Seq1durationHr,Seq1durationMin,Seq2durationHr,Seq2durationMin;
 extern uint8_t seq1_remaining_time_Hr,seq1_remaining_time_min,seq2_remaining_time_Hr,seq2_remaining_time_min;
 extern uint8_t status_to_server;
 extern uint16_t ProcessId_Value;
-
+extern uint8_t Ip_config_Ip[4],Ip_Config_Subnet[4],Ip_config_gateway[4],Ip_config_DNS[4],Ip_config_Server[4];
+extern uint16_t Ip_config_Server_Port;
+extern uint32_t carbonActWght,SilicaActWght,ManganeaseActWght,copperActWght,tinActWght,zincActWeight;
 uint16_t set_duration_seq1,set_duration_seq2;
 uint16_t remaining_duration_seq1,remaining_duration_seq2;
 
@@ -216,7 +218,20 @@ void wiz5500Init(void)
 	} while (tmp == PHY_LINK_OFF);
 	HAL_Delay(3000);
 	//getVERSIONR();
+	gWIZNETINFO.ip[0]=Ip_config_Ip[0];
+	gWIZNETINFO.ip[1]=Ip_config_Ip[1];
+	gWIZNETINFO.ip[2]=Ip_config_Ip[2];
+	gWIZNETINFO.ip[3]=Ip_config_Ip[3];
 
+	gWIZNETINFO.sn[0]=Ip_Config_Subnet[0];
+	gWIZNETINFO.sn[1]=Ip_Config_Subnet[1];
+	gWIZNETINFO.sn[2]=Ip_Config_Subnet[2];
+	gWIZNETINFO.sn[3]=Ip_Config_Subnet[3];
+
+	gWIZNETINFO.gw[0]=Ip_config_gateway[0];
+	gWIZNETINFO.gw[1]=Ip_config_gateway[1];
+	gWIZNETINFO.gw[2]=Ip_config_gateway[2];
+	gWIZNETINFO.gw[3]=Ip_config_gateway[3];
 	wizchip_setnetinfo(&gWIZNETINFO);
 	HAL_Delay(1000);
 
@@ -259,7 +274,11 @@ void processDHCP(void)
 
 void initializeHttp(void)
 {
-	httpc_init(0, Domain_IP, 9006, g_send_buf, g_recv_buf);
+	Domain_IP[0] = Ip_config_Server[0];
+	Domain_IP[1] = Ip_config_Server[1];
+	Domain_IP[2] = Ip_config_Server[2];
+	Domain_IP[3] = Ip_config_Server[3];
+	httpc_init(0, Domain_IP, Ip_config_Server_Port, g_send_buf, g_recv_buf);
 }
 
 void ethernetHTTPRoutine(void)
@@ -279,9 +298,10 @@ void ethernetHTTPRoutine(void)
 		// Send: HTTP request
 //usm3-ht.acceedo.in:9005/set_temp?u=5&p=00000001&tm=0030&tl=0320&th=0030&h=030&l=080&ht=070&lt=080&rv=0130&bv=0650&yv=1230&rc=2705&bc=2909&yc=0500&k=203040&x=1
 
-		sprintf(URI,"/loadmeasure?h=000000&f=1&t=255&c_cur=1.483&c_act=00.000&c_sts=1&si_cur=124483&si_act=00.00&"
-				"si_sts=1&mn_cur=124483&mn_act=2000&mn_sts=1&"
-				"cu_cur=04.000&cu_act=2000&cu_sts=1&sn_cur=124483&sn_act=2000&sn_sts=1&zn_cur=124483&zn_act=2000&zn_sts=1&sts=1");
+		sprintf(URI,"/loadmeasure?h=000000&f=1&t=255&c_cur=1.483&c_act=%d&c_sts=1&si_cur=124483&si_act=%d&"
+				"si_sts=1&mn_cur=124483&mn_act=%d&mn_sts=1&"
+				"cu_cur=04.000&cu_act=%d&cu_sts=1&sn_cur=124483&sn_act=%d&sn_sts=1&zn_cur=124483&zn_act=%d&zn_sts=1&sts=1",carbonActWght,SilicaActWght,ManganeaseActWght,
+				copperActWght,tinActWght,zincActWeight);
 		request.method = (uint8_t *)HTTP_GET;
 		request.uri = (uint8_t *)URI;
 		request.host = (uint8_t *)Domain_name;

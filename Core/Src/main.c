@@ -89,7 +89,7 @@ unsigned char Txcomplete;
 uint8_t check_w,check_r;
 uint8_t testvariable[8]={1,2,3,4,5,6,7,8};
 uint8_t testvariable1[8];
-
+extern uint8_t Rx_Dwin_Buff[3];
 /* USER CODE END 0 */
 
 /**
@@ -150,9 +150,8 @@ int main(void)
   HAL_Delay(2);
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET);
 
-  wiz5500Init();
-
   W25qxx_Init();
+  HAL_UART_Receive_IT(&hlpuart1,Rx_Dwin_Buff,1);
   //rtc_set_time(13,14,30);
   //rtc_set_date(2,20,2,23);
   while (1)

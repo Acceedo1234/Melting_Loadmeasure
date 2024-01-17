@@ -13,21 +13,59 @@ uint8_t rxTempBuff[5];
 extern uint8_t u8rxbuf[255];
 uint8_t checkbuff[200];
 uint8_t refinc;
+uint8_t Rx_Dwin_Data_Buff[50];
+uint8_t Rx_Dwin_Buff[3];
+uint8_t Rx_Dwin_Data_Buff_Point;
+uint8_t Rx_Dwin_Complete;
+uint8_t No_Of_Dwin_Bytes;
 
 uint32_t carbonActWght,SilicaActWght,ManganeaseActWght,copperActWght,tinActWght,zincActWeight;
 
 
 extern uint8_t Rxseqdecoder;
+extern uint8_t Rx_Dwin_Point;
 extern void ESPRxDecoder(unsigned char Rxwifi_data,unsigned char Rxseqdecoder);
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if(huart == &hlpuart1)
 	{
-		ESPRxDecoder(rxTempBuff[0],Rxseqdecoder);
-
-		HAL_UART_Receive_IT(&hlpuart1,rxTempBuff,1);
-	}
+		if((Rx_Dwin_Buff[0] ==0x83)&&(Rx_Dwin_Point==0))
+			{
+				Rx_Dwin_Point=1;
+			}
+			else if(Rx_Dwin_Point==1)
+			{
+				if(Rx_Dwin_Buff[0] == 0x30){
+					Rx_Dwin_Point=2;
+				}
+				else{
+					Rx_Dwin_Point=0;
+				}
+			}
+			else if((Rx_Dwin_Buff[0] == 0x00)&&(Rx_Dwin_Point==2))
+			{
+				Rx_Dwin_Point=3;
+			}
+			else if(Rx_Dwin_Point==3)
+			{
+				Rx_Dwin_Point=4;
+				No_Of_Dwin_Bytes = Rx_Dwin_Buff[0]*2;
+				Rx_Dwin_Data_Buff_Point = 0;
+			}
+			else if(Rx_Dwin_Point==4)
+			{
+				//Rx_Dwin_Point=4;
+				Rx_Dwin_Data_Buff[Rx_Dwin_Data_Buff_Point]= Rx_Dwin_Buff[0];
+				No_Of_Dwin_Bytes = No_Of_Dwin_Bytes-1;
+				Rx_Dwin_Data_Buff_Point = Rx_Dwin_Data_Buff_Point+1;
+				if(No_Of_Dwin_Bytes==0){
+					Rx_Dwin_Complete = 1;
+					Rx_Dwin_Point=0;
+				}
+			}
+			HAL_UART_Receive_IT(&hlpuart1,Rx_Dwin_Buff,1);
+		}
 
 	if(huart == &huart1)
 	{

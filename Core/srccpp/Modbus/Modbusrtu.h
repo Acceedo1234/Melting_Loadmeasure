@@ -12,6 +12,7 @@
 
 
 extern UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef hlpuart1;
 
 
 class Modbusrtu {
@@ -20,8 +21,11 @@ public:
 	virtual ~Modbusrtu();
 	void ModbusReadTransaction(void);
 	uint16_t ASCChecksum(uint8_t *ASCSrc, uint8_t NoOfBytes);
+	void dwinFrame(void);
+	void dwinDecoder(void);
 
-	uint8_t Cntid;
+
+	uint8_t Cntid,Cntid_dwin;
 	uint8_t getReadInputReg(void) const;
 	uint16_t getStartAddress(void) const;
 	uint16_t getNoOfData(void) const;
@@ -29,6 +33,11 @@ public:
 
 
 	uint8_t u8ModbusRegister[8];
+	uint8_t u8ModbusRegisterdwin[16];
+	uint8_t noOfDataDwin;
+
+	uint8_t d;
+	uint8_t x;
 private:
 	uint8_t mTemperatureSensorId=1;
 	const uint8_t CRCArrayHigh[256] = {

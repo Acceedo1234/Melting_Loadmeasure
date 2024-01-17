@@ -32,10 +32,10 @@ Core/Src/W5500_C/w5500_spi.o: ../Core/Src/W5500_C/w5500_spi.c \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
  ../Core/Src/W5500_C/wizchip_conf.h ../Core/Src/W5500_C/W5500/w5500.h \
- D:/PROGRAM/Naveen/melting/Loadmeasure-20.12.23/Core/Src/W5500_C/wizchip_conf.h \
+ D:/SourceTree/melting_loadmeasure/Core/Src/W5500_C/wizchip_conf.h \
  ../Core/Src/W5500_C/socket.h \
- D:/PROGRAM/Naveen/melting/Loadmeasure-20.12.23/Core/Src/Internet/DHCP/dhcp.h \
- D:/PROGRAM/Naveen/melting/Loadmeasure-20.12.23/Core/Src/Internet/DNS/dns.h \
+ D:/SourceTree/melting_loadmeasure/Core/Src/Internet/DHCP/dhcp.h \
+ D:/SourceTree/melting_loadmeasure/Core/Src/Internet/DNS/dns.h \
  ../Core/Src/W5500_C/httpClient.h
 ../Core/Inc/main.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
@@ -72,8 +72,8 @@ Core/Src/W5500_C/w5500_spi.o: ../Core/Src/W5500_C/w5500_spi.c \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
 ../Core/Src/W5500_C/wizchip_conf.h:
 ../Core/Src/W5500_C/W5500/w5500.h:
-D:/PROGRAM/Naveen/melting/Loadmeasure-20.12.23/Core/Src/W5500_C/wizchip_conf.h:
+D:/SourceTree/melting_loadmeasure/Core/Src/W5500_C/wizchip_conf.h:
 ../Core/Src/W5500_C/socket.h:
-D:/PROGRAM/Naveen/melting/Loadmeasure-20.12.23/Core/Src/Internet/DHCP/dhcp.h:
-D:/PROGRAM/Naveen/melting/Loadmeasure-20.12.23/Core/Src/Internet/DNS/dns.h:
+D:/SourceTree/melting_loadmeasure/Core/Src/Internet/DHCP/dhcp.h:
+D:/SourceTree/melting_loadmeasure/Core/Src/Internet/DNS/dns.h:
 ../Core/Src/W5500_C/httpClient.h:
