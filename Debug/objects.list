@@ -24,6 +24,7 @@
 "./Core/srccpp/DisplayCPP/DisplayRoutine.o"
 "./Core/srccpp/DisplayCPP/GLCD.o"
 "./Core/srccpp/Ethernet/W5500.o"
+"./Core/srccpp/FaultHandling/Faulthandling.o"
 "./Core/srccpp/Modbus/Modbusrtu.o"
 "./Core/srccpp/OfflineStorage/OfflineStorage.o"
 "./Core/srccpp/Shift/SHIFT.o"

@@ -4,6 +4,7 @@
 #include "Modbusrtu.h"
 #include "DisplayRoutine.h"
 #include "OfflineStorage.h"
+#include "Faulthandling.h"
 #include "ESP8266.h"
 #include "SHIFT.h"
 #include <stdio.h>
@@ -37,10 +38,12 @@ void cppMain()
 	DisplayRoutine displayRoutineInst;
 	Loadmeasure loadmeasureInst;
 	OfflineStorage offlineStorageInst;
+	Faulthandling faulthandling;
 //	ESP8266 esp8266Inst;
 //	SHIFT shiftInst;
 	offlineStorageInst.ReadOfflinedataInit();
 	displayRoutineInst.Init();
+
 //	esp8266Inst.Init();
 //	ReadOnlineData();
 	wiz5500Init();
@@ -68,7 +71,7 @@ void cppMain()
 		if(Flag1Second)
 		{
 			Flag1Second=0;
-			displayRoutineInst.run();
+			faulthandling.run();
 			ethernetHTTPRoutine();
 		}
 	}

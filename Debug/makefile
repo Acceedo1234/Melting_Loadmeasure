@@ -14,6 +14,7 @@ RM := rm -rf
 -include Core/srccpp/Shift/subdir.mk
 -include Core/srccpp/OfflineStorage/subdir.mk
 -include Core/srccpp/Modbus/subdir.mk
+-include Core/srccpp/FaultHandling/subdir.mk
 -include Core/srccpp/Ethernet/subdir.mk
 -include Core/srccpp/DisplayCPP/subdir.mk
 -include Core/srccpp/Common/subdir.mk

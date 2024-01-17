@@ -85,6 +85,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/loadmeasure/Core/srccpp/Shift}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/loadmeasure/Core/srccpp/WifiEsp8266}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/loadmeasure/Core/srccpp/BussinessLogic}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/loadmeasure/Core/srccpp/FaultHandling}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.939264457" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
 							</tool>

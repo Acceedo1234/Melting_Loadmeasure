@@ -44,6 +44,7 @@ Core/srccpp/BussinessLogic \
 Core/srccpp/Common \
 Core/srccpp/DisplayCPP \
 Core/srccpp/Ethernet \
+Core/srccpp/FaultHandling \
 Core/srccpp/Modbus \
 Core/srccpp/OfflineStorage \
 Core/srccpp/Shift \

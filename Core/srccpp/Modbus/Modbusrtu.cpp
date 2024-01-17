@@ -33,6 +33,10 @@ extern uint8_t Rx_Dwin_Complete;
 extern uint8_t negValue[10];
 extern uint32_t Carbon_calculated_Weight,Silica_calculated_Weight,manganease_calculated_Weight,Copper_calculated_Weight,Tin_calculated_Weight,Zinc_calculated_Weight;
 extern uint8_t Rx_Dwin_Data_Buff[50];
+extern uint32_t heatnumber;
+extern uint16_t furnace;
+extern uint8_t statusBincom_Fault;
+extern uint8_t calculateDeltaWeight;
 
 uint8_t TxSeqComplete;
 uint8_t test;
@@ -197,13 +201,18 @@ void Modbusrtu::dwinFrame(void)
 		u8ModbusRegisterdwin[3] = multipleWriteRequestL;
 		u8ModbusRegisterdwin[4] = 0x20;
 		u8ModbusRegisterdwin[5] = 0x00;
-		u8ModbusRegisterdwin[6] = 0x00;
-		u8ModbusRegisterdwin[7] = test;
-		u8ModbusRegisterdwin[8] = 0;
-		u8ModbusRegisterdwin[9] = httpc_isConnected;
+		u8ModbusRegisterdwin[6] = highByte(furnace);//furnace,heatnumber,bincommunicationstatus,ethernet status
+		u8ModbusRegisterdwin[7] = lowByte(furnace);
+		u8ModbusRegisterdwin[8] = highByte(heatnumber);
+		u8ModbusRegisterdwin[9] = lowByte(heatnumber);
 		u8ModbusRegisterdwin[10] = 0;
-		u8ModbusRegisterdwin[11] = 1;
-		noOfDataDwin=12;
+		u8ModbusRegisterdwin[11] = statusBincom_Fault;
+		u8ModbusRegisterdwin[12] = 0;
+		u8ModbusRegisterdwin[13] = httpc_isConnected;
+		u8ModbusRegisterdwin[14] = 0;
+		u8ModbusRegisterdwin[15] = calculateDeltaWeight;
+
+		noOfDataDwin=16;
 		Cntid_dwin=1;
 	break;
 	case 1:
@@ -213,13 +222,17 @@ void Modbusrtu::dwinFrame(void)
 		u8ModbusRegisterdwin[3] = multipleWriteRequestL;
 		u8ModbusRegisterdwin[4] = 0x20;
 		u8ModbusRegisterdwin[5] = 0x00;
-		u8ModbusRegisterdwin[6] = 0x00;
-		u8ModbusRegisterdwin[7] = test;
-		u8ModbusRegisterdwin[8] = 0;
-		u8ModbusRegisterdwin[9] = httpc_isConnected;
+		u8ModbusRegisterdwin[6] = highByte(furnace);//furnace,heatnumber,bincommunicationstatus,ethernet status
+		u8ModbusRegisterdwin[7] = lowByte(furnace);
+		u8ModbusRegisterdwin[8] = highByte(heatnumber);
+		u8ModbusRegisterdwin[9] = lowByte(heatnumber);
 		u8ModbusRegisterdwin[10] = 0;
-		u8ModbusRegisterdwin[11] = 1;
-		noOfDataDwin=12;
+		u8ModbusRegisterdwin[11] = statusBincom_Fault;
+		u8ModbusRegisterdwin[12] = 0;
+		u8ModbusRegisterdwin[13] = httpc_isConnected;
+		u8ModbusRegisterdwin[14] = 0;
+		u8ModbusRegisterdwin[15] = calculateDeltaWeight;
+		noOfDataDwin=16;
 		Cntid_dwin=2;
 	break;
 	case 2:

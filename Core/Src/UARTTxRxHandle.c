@@ -20,6 +20,7 @@ uint8_t Rx_Dwin_Complete;
 uint8_t No_Of_Dwin_Bytes;
 
 uint32_t carbonActWght,SilicaActWght,ManganeaseActWght,copperActWght,tinActWght,zincActWeight;
+uint8_t statusBincom;
 
 
 extern uint8_t Rxseqdecoder;
@@ -71,21 +72,27 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	{
 		if((u8rxbuf[0] == CARBON)&&(u8rxbuf[1] == 0x04)&&(u8rxbuf[2] == 0x04)){
 			carbonActWght = (u8rxbuf[3]<<24 | u8rxbuf[4]<<16 | u8rxbuf[5]<<8 | u8rxbuf[6]);
+			statusBincom = (statusBincom|(1<<0));
 		}
 		if((u8rxbuf[0] == SILICA)&&(u8rxbuf[1] == 0x04)&&(u8rxbuf[2] == 0x04)){
 			SilicaActWght = (u8rxbuf[3]<<24 | u8rxbuf[4]<<16 | u8rxbuf[5]<<8 | u8rxbuf[6]);
+			statusBincom = (statusBincom|(1<<1));
 		}
 		if((u8rxbuf[0] == MANGANEASE)&&(u8rxbuf[1] == 0x04)&&(u8rxbuf[2] == 0x04)){
 			ManganeaseActWght = (u8rxbuf[3]<<24 | u8rxbuf[4]<<16 | u8rxbuf[5]<<8 | u8rxbuf[6]);
+			statusBincom = (statusBincom|(1<<2));
 		}
 		if((u8rxbuf[0] == COPPER)&&(u8rxbuf[1] == 0x04)&&(u8rxbuf[2] == 0x04)){
 			copperActWght = (u8rxbuf[3]<<24 | u8rxbuf[4]<<16 | u8rxbuf[5]<<8 | u8rxbuf[6]);
+			statusBincom = (statusBincom|(1<<3));
 		}
 		if((u8rxbuf[0] == TIN)&&(u8rxbuf[1] == 0x04)&&(u8rxbuf[2] == 0x04)){
 			tinActWght = (u8rxbuf[3]<<24 | u8rxbuf[4]<<16 | u8rxbuf[5]<<8 | u8rxbuf[6]);
+			statusBincom = (statusBincom|(1<<4));
 		}
 		if((u8rxbuf[0] == ZINC)&&(u8rxbuf[1] == 0x04)&&(u8rxbuf[2] == 0x04)){
 			zincActWeight = (u8rxbuf[3]<<24 | u8rxbuf[4]<<16 | u8rxbuf[5]<<8 | u8rxbuf[6]);
+			statusBincom = (statusBincom|(1<<5));
 		}
 	}
 }

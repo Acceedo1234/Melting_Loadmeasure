@@ -1,5 +1,6 @@
-Core/srccpp/main.o: ../Core/srccpp/main.cpp \
- D:/SourceTree/melting_loadmeasure/Core/srccpp/BussinessLogic/ApplicationSW.h \
+Core/srccpp/FaultHandling/Faulthandling.o: \
+ ../Core/srccpp/FaultHandling/Faulthandling.cpp \
+ D:/SourceTree/melting_loadmeasure/Core/srccpp/FaultHandling/Faulthandling.h \
  ../Core/Inc/main.h ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h \
  ../Core/Inc/stm32l4xx_hal_conf.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h \
@@ -32,16 +33,8 @@ Core/srccpp/main.o: ../Core/srccpp/main.cpp \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
- D:/SourceTree/melting_loadmeasure/Core/srccpp/DisplayCPP/GLCD.h \
- D:/SourceTree/melting_loadmeasure/Core/srccpp/Common/common.h \
- D:/SourceTree/melting_loadmeasure/Core/srccpp/Modbus/Modbusrtu.h \
- D:/SourceTree/melting_loadmeasure/Core/srccpp/DisplayCPP/DisplayRoutine.h \
- D:/SourceTree/melting_loadmeasure/Core/srccpp/DisplayCPP/GLCD.h \
- D:/SourceTree/melting_loadmeasure/Core/srccpp/OfflineStorage/OfflineStorage.h \
- D:/SourceTree/melting_loadmeasure/Core/srccpp/FaultHandling/Faulthandling.h \
- D:/SourceTree/melting_loadmeasure/Core/srccpp/WifiEsp8266/ESP8266.h \
- D:/SourceTree/melting_loadmeasure/Core/srccpp/Shift/SHIFT.h
-D:/SourceTree/melting_loadmeasure/Core/srccpp/BussinessLogic/ApplicationSW.h:
+ D:/SourceTree/melting_loadmeasure/Core/srccpp/Common/baselib.h
+D:/SourceTree/melting_loadmeasure/Core/srccpp/FaultHandling/Faulthandling.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
@@ -75,12 +68,4 @@ D:/SourceTree/melting_loadmeasure/Core/srccpp/BussinessLogic/ApplicationSW.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
-D:/SourceTree/melting_loadmeasure/Core/srccpp/DisplayCPP/GLCD.h:
-D:/SourceTree/melting_loadmeasure/Core/srccpp/Common/common.h:
-D:/SourceTree/melting_loadmeasure/Core/srccpp/Modbus/Modbusrtu.h:
-D:/SourceTree/melting_loadmeasure/Core/srccpp/DisplayCPP/DisplayRoutine.h:
-D:/SourceTree/melting_loadmeasure/Core/srccpp/DisplayCPP/GLCD.h:
-D:/SourceTree/melting_loadmeasure/Core/srccpp/OfflineStorage/OfflineStorage.h:
-D:/SourceTree/melting_loadmeasure/Core/srccpp/FaultHandling/Faulthandling.h:
-D:/SourceTree/melting_loadmeasure/Core/srccpp/WifiEsp8266/ESP8266.h:
-D:/SourceTree/melting_loadmeasure/Core/srccpp/Shift/SHIFT.h:
+D:/SourceTree/melting_loadmeasure/Core/srccpp/Common/baselib.h:

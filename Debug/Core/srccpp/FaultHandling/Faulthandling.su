@@ -1,0 +1,7 @@
+D:/SourceTree/melting_loadmeasure/Core/srccpp/Common/baselib.h:16:16:uint8_t clearbit(uint8_t, uint8_t)	16	static
+D:/SourceTree/melting_loadmeasure/Core/srccpp/Common/baselib.h:20:16:uint8_t setbitAC(uint8_t, uint8_t)	16	static
+../Core/srccpp/FaultHandling/Faulthandling.cpp:23:1:Faulthandling::Faulthandling()	16	static
+../Core/srccpp/FaultHandling/Faulthandling.cpp:28:1:Faulthandling::~Faulthandling()	16	static
+../Core/srccpp/FaultHandling/Faulthandling.cpp:28:1:virtual Faulthandling::~Faulthandling()	16	static
+../Core/srccpp/FaultHandling/Faulthandling.cpp:32:6:void Faulthandling::run()	16	static
+../Core/srccpp/FaultHandling/Faulthandling.cpp:36:6:void Faulthandling::communicationBinFault()	16	static

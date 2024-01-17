@@ -7,6 +7,7 @@
  #include"main.h"
 #include "dhcp.h"
  
+
  extern TIM_HandleTypeDef htim7;
  extern TIM_HandleTypeDef htim6;
  uint8_t Flag1MS;
@@ -19,6 +20,7 @@
  extern uint8_t start_process_control_timer;
  extern uint8_t stop_timer_count;
  extern uint8_t process_complete;
+
  
  uint16_t seq1_count_inc,seq2_count_inc;
  uint16_t seq1_remaining_time_total_min,seq2_remaining_time_total_min;
@@ -36,17 +38,9 @@
  		if(++LocCount1S >= 10)
 		{
 			LocCount1S=0;
-			if(++SimCount >= 20)
-			{
-				SimCount=0;
-				HAL_GPIO_TogglePin(GPIOC, RELAY4_Pin);
-			}
 			Flag1Second =1;
 			DHCP_time_handler( );
-
 		}
-
-
 	}
  
  }
