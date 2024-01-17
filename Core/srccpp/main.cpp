@@ -62,6 +62,7 @@ void cppMain()
 			ModbusInst.ModbusReadTransaction();
 			ModbusInst.dwinFrame();
 			ModbusInst.dwinDecoder();
+			ModbusInst.sevenSegFrame();
 			loadmeasureInst.run();
 		}
 		if(Flag1Second)

@@ -8,6 +8,6 @@
 ../Core/Src/W5500_C/httpClient.c:352:10:httpc_recv	24	static
 ../Core/Src/W5500_C/httpClient.c:371:9:httpc_disconnect	16	static
 ../Core/Src/W5500_C/httpClient.c:395:10:get_httpc_any_port	8	static
-../Core/Src/W5500_C/httpClient.c:415:6:receivehttpcheck	80	static
+../Core/Src/W5500_C/httpClient.c:415:6:receivehttpcheck	8	static
 ../Core/Src/W5500_C/httpClient.c:488:5:get_index	24	static
 ../Core/Src/W5500_C/httpClient.c:498:10:getSubstring	64	static

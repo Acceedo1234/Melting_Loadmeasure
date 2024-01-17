@@ -429,41 +429,41 @@ void receivehttpcheck(void)
 
 	index_s = get_index(filtereddata,':');
 	index_e = get_index(filtereddata,',');
-	char check_filterdata[] = "$H:123456,t=255,f=5,c=234,si=1234,mn=3485,cu=67,sn=786,zn=367,sts=3#";
-	heatnumber = getSubstring(check_filterdata,index_s,index_e);
+	//char check_filterdata[] = "$H:123456,t=255,f=5,c=234,si=1234,mn=3485,cu=67,sn=786,zn=367,sts=3#";
+	heatnumber = getSubstring(filtereddata,index_s,index_e);
 
-	index_s = get_index(check_filterdata,'t');
-	index_e = get_index(check_filterdata,'f');
+	index_s = get_index(filtereddata,'t');
+	index_e = get_index(filtereddata,'f');
 	index_s=index_s+1;
 	index_e=index_e-1;
-	rxType 	 = (uint16_t)getSubstring(check_filterdata,index_s,index_e);
+	rxType 	 = (uint16_t)getSubstring(filtereddata,index_s,index_e);
 
-	index_s = get_index(check_filterdata,'f');
-	index_e = get_index(check_filterdata,'c');
+	index_s = get_index(filtereddata,'f');
+	index_e = get_index(filtereddata,'c');
 	index_s=index_s+1;
 	index_e=index_e-1;
-	furnace	 =  (uint16_t)getSubstring(check_filterdata,index_s,index_e);
+	furnace	 =  (uint16_t)getSubstring(filtereddata,index_s,index_e);
 
-	index_s = get_index(check_filterdata,'c');
-	index_e = get_index(check_filterdata,'s');
+	index_s = get_index(filtereddata,'c');
+	index_e = get_index(filtereddata,'s');
 	index_s=index_s+1;
 	index_e=index_e-1;
-	rxReqCarbon	= (uint16_t)getSubstring(check_filterdata,index_s,index_e);
+	rxReqCarbon	= (uint16_t)getSubstring(filtereddata,index_s,index_e);
 
-	index_s = get_index(check_filterdata,'s');
-	index_e = get_index(check_filterdata,'m');
+	index_s = get_index(filtereddata,'s');
+	index_e = get_index(filtereddata,'m');
 	index_s=index_s+2;
 	index_e=index_e-1;
-	rxReqSilica	=   (uint16_t)getSubstring(check_filterdata,index_s,index_e);
+	rxReqSilica	=   (uint16_t)getSubstring(filtereddata,index_s,index_e);
 
-	index_s = get_index(check_filterdata,'m');
-	index_e = get_index(check_filterdata,'u');
+	index_s = get_index(filtereddata,'m');
+	index_e = get_index(filtereddata,'u');
 	index_s=index_s+2;
 	index_e=index_e-2;
-	rxReqMn	=   (uint16_t)getSubstring(check_filterdata,index_s,index_e);
+	rxReqMn	=   (uint16_t)getSubstring(filtereddata,index_s,index_e);
 
-	index_s = get_index(check_filterdata,'u');
-	strcpy(filterdatasplit,&check_filterdata[index_s]);
+	index_s = get_index(filtereddata,'u');
+	strcpy(filterdatasplit,&filtereddata[index_s]);
 
 	index_s = get_index(filterdatasplit,'u');
 	index_e = get_index(filterdatasplit,'s');

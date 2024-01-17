@@ -13,6 +13,9 @@
 #define STARTADDRESS 0x03
 #define NOOFDATA     0x02
 
+#define highByte(a) (((a) >> 8) & 0xFF)
+#define lowByte(a) ((a) & 0xFF)
+
 /*DWIN hmi uart data*/
 
 constexpr uint8_t START_BYTE_1=0x5A;
@@ -27,6 +30,10 @@ extern uint16_t temperature_reference;
 extern uint8_t httpc_isConnected;
 extern uint8_t Rx_Dwin_Complete;
 
+extern uint8_t negValue[10];
+extern uint32_t Carbon_calculated_Weight,Silica_calculated_Weight,manganease_calculated_Weight,Copper_calculated_Weight,Tin_calculated_Weight,Zinc_calculated_Weight;
+extern uint8_t Rx_Dwin_Data_Buff[50];
+
 uint8_t TxSeqComplete;
 uint8_t test;
 uint8_t Rx_Dwin_Point;
@@ -38,7 +45,8 @@ uint8_t No_Of_Furnace;
 uint16_t Ip_config_Server_Port_K1;
 uint8_t No_Of_Meter_K1;
 uint8_t No_Of_Meter;
-extern uint8_t Rx_Dwin_Data_Buff[50];
+
+
 Modbusrtu::Modbusrtu() {
 	// TODO Auto-generated constructor stub
 
@@ -308,3 +316,43 @@ void Modbusrtu::dwinDecoder(void)
 		}
 	}
 }
+
+void Modbusrtu::sevenSegFrame(void)
+{
+	u8ModbusRegistersevnseg[0] = 0x01;
+	u8ModbusRegistersevnseg[1] = 0x16;
+	u8ModbusRegistersevnseg[2] = 0x00;
+	u8ModbusRegistersevnseg[3] = 0x01;
+	u8ModbusRegistersevnseg[4] = 0x00;
+	u8ModbusRegistersevnseg[5] = 0x06;
+	u8ModbusRegistersevnseg[6] = 0x18;
+	u8ModbusRegistersevnseg[7] =  ((uint8_t) ((Carbon_calculated_Weight) >> 16));
+	u8ModbusRegistersevnseg[8] =  highByte(Carbon_calculated_Weight);
+	u8ModbusRegistersevnseg[9] =  lowByte(Carbon_calculated_Weight);
+	u8ModbusRegistersevnseg[10] = negValue[0];
+	u8ModbusRegistersevnseg[11] =  ((uint8_t) ((Silica_calculated_Weight) >> 16));
+	u8ModbusRegistersevnseg[12] =  highByte(Silica_calculated_Weight);
+	u8ModbusRegistersevnseg[13] = lowByte(Silica_calculated_Weight);
+	u8ModbusRegistersevnseg[14] = negValue[1];
+	u8ModbusRegistersevnseg[15] =  ((uint8_t) ((manganease_calculated_Weight) >> 16));
+	u8ModbusRegistersevnseg[16] = highByte(manganease_calculated_Weight);
+	u8ModbusRegistersevnseg[17] = lowByte(manganease_calculated_Weight);
+	u8ModbusRegistersevnseg[18] = negValue[2];
+	u8ModbusRegistersevnseg[19] =  ((uint8_t) ((Copper_calculated_Weight) >> 16));
+	u8ModbusRegistersevnseg[20] = highByte(Copper_calculated_Weight);
+	u8ModbusRegistersevnseg[21] = lowByte(Copper_calculated_Weight);
+	u8ModbusRegistersevnseg[22] = negValue[3];
+	u8ModbusRegistersevnseg[23] =  ((uint8_t) ((Tin_calculated_Weight) >> 16));
+	u8ModbusRegistersevnseg[24] = highByte(Tin_calculated_Weight);
+	u8ModbusRegistersevnseg[25] = lowByte(Tin_calculated_Weight);
+	u8ModbusRegistersevnseg[26] = negValue[4];
+	u8ModbusRegistersevnseg[27] =  ((uint8_t) ((Zinc_calculated_Weight) >> 16));
+	u8ModbusRegistersevnseg[28] = highByte(Zinc_calculated_Weight);
+	u8ModbusRegistersevnseg[29] = lowByte(Zinc_calculated_Weight);
+	u8ModbusRegistersevnseg[30] = negValue[5];
+
+	u8ModbusRegistersevnseg[31] = 0x55;
+	u8ModbusRegistersevnseg[32] = 0xff;
+	HAL_UART_Transmit_IT(&huart2,u8ModbusRegistersevnseg,33);
+}
+

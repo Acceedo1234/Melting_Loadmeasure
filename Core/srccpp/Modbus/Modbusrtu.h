@@ -13,6 +13,7 @@
 
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef hlpuart1;
+extern UART_HandleTypeDef huart2;
 
 
 class Modbusrtu {
@@ -22,6 +23,7 @@ public:
 	void ModbusReadTransaction(void);
 	uint16_t ASCChecksum(uint8_t *ASCSrc, uint8_t NoOfBytes);
 	void dwinFrame(void);
+	void sevenSegFrame(void);
 	void dwinDecoder(void);
 
 
@@ -34,6 +36,7 @@ public:
 
 	uint8_t u8ModbusRegister[8];
 	uint8_t u8ModbusRegisterdwin[16];
+	uint8_t u8ModbusRegistersevnseg[40];
 	uint8_t noOfDataDwin;
 
 	uint8_t d;
