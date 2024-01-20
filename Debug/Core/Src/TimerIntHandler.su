@@ -1,1 +1,2 @@
-../Core/Src/TimerIntHandler.c:29:7:HAL_TIM_PeriodElapsedCallback	16	static
+../Core/Src/TimerIntHandler.c:35:7:HAL_TIM_PeriodElapsedCallback	16	static
+../Core/Src/TimerIntHandler.c:55:7:IndicationHandler	8	static

@@ -10,6 +10,8 @@ extern "C"{
 }
 #include <BussinessLogic/ApplicationSW.h>
 #include "main.h"
+
+
 GPIO_PinState GPIO_PinStateMac;
 GPIO_PinState GPIO_PinStateRej;
 
@@ -30,6 +32,7 @@ uint16_t ProcessId_Value;
 extern uint8_t skipIdTCP;
 extern uint8_t statusTCP;
 extern uint16_t seq1_count_inc,seq2_count_inc;
+extern uint16_t furnace;
 
 
 uint16_t Seq1temperature;

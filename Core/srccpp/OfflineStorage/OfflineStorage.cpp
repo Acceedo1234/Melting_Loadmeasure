@@ -42,6 +42,7 @@ extern uint16_t Ip_config_Server_Port;
 extern uint8_t updateTargetWightInMem;
 extern uint32_t carbonTargetWghtMem,silicaTargetWghtMem,manganeaseTargetWghtMem,copperTargetWghtMem,tinTargetWghtMem,zincTargetWghtMem;
 extern uint8_t calculateDeltaWeight;
+extern uint16_t Ip_config_Server_Port_K1;
 
 OfflineStorage::OfflineStorage() {
 	// TODO Auto-generated constructor stub
@@ -119,6 +120,7 @@ void OfflineStorage::m_writecalculationdata(){
 
 			m_writeDwinBuf[20] = (unsigned char)(Ip_config_Server_Port>>8)&0x00ff;
 			m_writeDwinBuf[21] = (unsigned char)(Ip_config_Server_Port)&0x00ff;
+			Ip_config_Server_Port_K1 = Ip_config_Server_Port;
 			W25qxx_WriteSector(m_writeDwinBuf,100,0,22);
 		}
 }
